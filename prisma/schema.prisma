@@ -13,23 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model category {
-  id     Int     @id @default(autoincrement())
-  mainname  String @unique
-   products     Product[]
+
+model Category {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  title     String
+  desc      String
+  color     String
+  img       String
+  slug      String    @unique
+  products  Product[]
 }
 
-model Product{
-  id      Int      @id @default(autoincrement())
-  prname   String   @unique
-  slug      String
-  prize      Decimal
-  cat     category  @relation(fields: [slug], references: [mainname])
-}
+model Product {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  title      String
+  desc       String
+  img        String?
+  price      Decimal
+  isFeatured Boolean  @default(false)
+  options    Json[]
+  category   Category @relation(fields: [catSlug], references: [slug])
+  catSlug    String
 
-
-model testing{
-  id Int @id @default(autoincrement())
-  name String
-  place String @unique
 }
