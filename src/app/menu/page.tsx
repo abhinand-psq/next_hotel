@@ -5,19 +5,6 @@ import { categorys } from "../type";
 import { cat } from "@/type";
 
 
-const dataex = async()=>{
-  let value = await fetch('http://localhost:3000/api/cat',{cache:"no-cache"})
-  let main = await value.json()
-  return main
-}
-
-
-
-const MenuPage = async() => {
-let value:categorys =await dataex()
-console.log(value);
-
-
 
 
 const getdata = async ()=>{
@@ -52,5 +39,5 @@ const MenuPage = async() => {
     </div>
   );
 };
-};
+
 export default MenuPage;

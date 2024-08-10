@@ -6,8 +6,6 @@ import React from "react";
 
 
 
-
-
 type value={
   params:{
     category:string
