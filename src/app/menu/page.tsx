@@ -14,8 +14,7 @@ return value1
 
 const MenuPage = async() => {
   const data:cat = await getdata()
-  const num = Math.floor(Math.random() * 4)
-  data.splice(1,1);
+ 
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col md:flex-row items-center">
       {data.map((category) => (

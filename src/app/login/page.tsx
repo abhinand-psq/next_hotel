@@ -1,8 +1,15 @@
+"use client"
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+
+
 const LoginPage = () => {
+  const {data:session} = useSession()
+  console.log(session?.user?.name);
+  
   return (
     <div className="p-4 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center">
       {/* BOX */}
@@ -12,7 +19,9 @@ const LoginPage = () => {
           <Image src="/loginBg.png" alt="" fill className="object-cover"/>
         </div>
         {/* FORM CONTAINER */}
-        <div className="p-10 flex flex-col gap-8 md:w-1/2">
+        <div className="p-10 flex flex-col gap-8 md:w-1/2" onClick={()=>{
+            signIn('google')
+          }}>
           <h1 className="font-bold text-xl xl:text-3xl">Welcome</h1>
           <p>Log into your account or create a new one using social buttons</p>
           <button className="flex gap-4 p-4 ring-1 ring-orange-100 rounded-md">
@@ -25,7 +34,7 @@ const LoginPage = () => {
             />
             <span>Sign in with Google</span>
           </button>
-          <button className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-md">
+          <button  className="flex gap-4 p-4 ring-1 ring-blue-100 rounded-md">
             <Image
               src="/facebook.png"
               alt=""
@@ -37,6 +46,7 @@ const LoginPage = () => {
           </button>
           <p className="text-sm">
             Have a problem?<Link className="underline" href="/"> Contact us</Link>
+            <button onClick={()=>{signOut()}}>sign out</button>
           </p>
         </div>
       </div>

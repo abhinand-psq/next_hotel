@@ -34,3 +34,23 @@ export type cat={
     slug :string
     products:products
 }[]
+
+export type useradmin ={
+    id: string
+    name: string 
+    email: string 
+    emailVerified: Date 
+    image: string 
+    isAdmin: boolean
+}
+
+export type order={
+    id   : string   
+    createdAt : number
+    price     :number
+    products  :{title:string}[]
+    status   : string
+    intent_id: string
+    user  :   object
+    userEmail:string
+}
