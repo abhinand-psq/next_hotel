@@ -1,4 +1,4 @@
-export type product1 ={
+export type product1 = {
     id:string   
     createdAt:number  
     title:String
@@ -6,7 +6,7 @@ export type product1 ={
     img:string
     price :number
    isFeatured:boolean
-    options :object
+    options :{ title: string; additionalPrice: number; }[]
     category:object
     catSlug :String
 }
@@ -19,7 +19,7 @@ export type products ={
     img:string
     price :number
    isFeatured:boolean
-    options :object
+    options :{}[]
     category:object
     catSlug :String
 }[]
@@ -54,3 +54,12 @@ export type order={
     user  :   object
     userEmail:string
 }
+
+export type cart={
+    id :string   
+    createdAt : number 
+    price   :  number
+    product_id :string
+    product   :product1
+    userEmail:string
+}[]

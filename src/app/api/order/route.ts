@@ -29,3 +29,24 @@ export const GET = async(req:NextRequest)=>{
  
 }
 
+export const PUT = async(req:NextRequest)=>{
+const vale = await req.json()
+console.log(vale);
+const result = await prisma.order.update({where:{id:vale.id},data:{status:vale.value}})
+return new NextResponse(JSON.stringify("not authenticated"),{status:200})
+}
+
+export const POST = async(req:NextRequest)=>{
+    const vale = await req.json()
+    console.log(vale);
+    console.log("working");
+    try{
+        console.log("working");
+        const result = await prisma.order.create({data:vale})
+        return new NextResponse(JSON.stringify(result),{status:200})
+    }catch(e){
+       console.log(e);
+        
+    return new NextResponse(JSON.stringify("error"),{status:400})
+    }
+    }
