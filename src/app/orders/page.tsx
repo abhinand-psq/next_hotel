@@ -10,6 +10,8 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 const OrdersPage = () => {
 
   
@@ -17,17 +19,30 @@ const OrdersPage = () => {
   console.log(session?.user.isadmin);
   console.log(session?.user.name);
 
- 
+  
 
 
   const {data,isLoading,error} =useQuery({
     queryKey:["value1"],
    queryFn:async ()=>{
-    return await fetch('http://localhost:3000/api/order').then((res)=>res.json())
+    return await fetch('http://localhost:3000/api/order',{cache:'no-cache'}).then((res)=>res.json())
    },
   }) 
 
+ const mutation = useMutation({
+  mutationFn:async ({id,status}:{id:string,status:string})=>{
+    return (fetch('http://localhost:3000/api/order',{body:JSON.stringify({id,status}),method:'PUT',headers:{'Content-type':'application/json'}}).then((res)=>res.json()))
+  },
+  onSuccess:()=>{
+    alert("hello")
+  queryClient.invalidateQueries({queryKey:['value1']})
+  }
+ })
+
   
+
+
+
   return (
     <div className="p-4 lg:px-20 xl:px-40">
       <table className="w-full border-separate border-spacing-3">
@@ -66,8 +81,19 @@ const OrdersPage = () => {
             <td className="py-6 px-1">{res.status}</td>
             <td className="py-6 px-7">
              <div className="flex">
-             <button className="px-1">preparing</button>
-              <button className="px-1">delivered</button>
+             <button  onClick={() => {
+          mutation.mutate({
+            id: res.id,
+            status:"preparing" ,
+          })
+        }} className="px-1">preparing</button>
+
+              <button  onClick={() => {
+          mutation.mutate({
+            id: res.id,
+            status:'delivered',
+          })
+        }} className="px-1">delivered</button>
              </div>
             </td>
           </tr>
