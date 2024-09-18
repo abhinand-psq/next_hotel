@@ -2,8 +2,14 @@
 import { order } from "@/type";
 import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
-import useSWR from 'swr'
-const fetcher = () => fetch('http://localhost:3000/api/order').then((res) => res.json())
+
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 const OrdersPage = () => {
 
   
@@ -11,7 +17,15 @@ const OrdersPage = () => {
   console.log(session?.user.isadmin);
   console.log(session?.user.name);
 
-  const { data, error } = useSWR('http://localhost:3000/api/order', fetcher)
+ 
+
+
+  const {data,isLoading,error} =useQuery({
+    queryKey:["value1"],
+   queryFn:async ()=>{
+    return await fetch('http://localhost:3000/api/order').then((res)=>res.json())
+   },
+  }) 
 
   
   return (
@@ -50,6 +64,12 @@ const OrdersPage = () => {
            </div>
            
             <td className="py-6 px-1">{res.status}</td>
+            <td className="py-6 px-7">
+             <div className="flex">
+             <button className="px-1">preparing</button>
+              <button className="px-1">delivered</button>
+             </div>
+            </td>
           </tr>
             )
           })

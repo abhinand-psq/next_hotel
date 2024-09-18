@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Session from "@/components/authsession";
+import { Quaryfun } from "@/components/Quarystack";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,12 +23,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div>
+          <Quaryfun>
           <Session>
           <Notification />
           <Navbar />
           {children}
           <Footer />
           </Session>
+          </Quaryfun>
         </div>
       </body>
     </html>
