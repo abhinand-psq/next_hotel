@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 type sample = {
     title:string,
-    prize:string,
+    additionalPrice:number,
 }
 
 function page() {
@@ -13,9 +13,9 @@ const [prize,setprize] = useState<string>('')
 
 const handleadd = (e:React.MouseEvent<HTMLButtonElement>  ) =>{
 e.preventDefault()
-setfirst((state:sample[])=>{
+setfirst((state:any)=>{
  return(
-    [...state,{title:option,prize:prize}]
+    [...state,{title:option,additionalPrice:parseInt(prize)}]
  ) 
 })
 }
@@ -27,7 +27,7 @@ const name = (target[0] as HTMLInputElement).value;
 const description = (target[1] as HTMLInputElement).value; 
 const prize = (target[2] as HTMLInputElement).value; 
 const cato = (target[3] as HTMLInputElement).value; 
-await fetch('http://localhost:3000/api/products',{body:JSON.stringify({title:name,desc:description,price:prize,isFeatured:false,options:first,catSlug:cato,}),method:'POST',headers:{'Content-type':'application/json'}})
+ await fetch('http://localhost:3000/api/products',{body:JSON.stringify({title:name,desc:description,price:parseInt(prize),isFeatured:false,options:first,catSlug:cato,}),method:'POST',headers:{'Content-type':'application/json'}})
 }
 
   return (
@@ -64,7 +64,7 @@ await fetch('http://localhost:3000/api/products',{body:JSON.stringify({title:nam
            
              <div className='flex gap-1 p-2  bg-slate-500 me-3'>
              <p >{`${res.title}  `}</p>
-             <p>{`$${res.prize}  `}</p>
+             <p>{`$${res.additionalPrice}  `}</p>
              <button onClick={()=>{
                 let a = first.filter((resp)=>resp.title != res.title)
                 console.log(a)
