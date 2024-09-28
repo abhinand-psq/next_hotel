@@ -10,8 +10,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-
-const queryClient = new QueryClient()
 const OrdersPage = () => {
 
   
@@ -19,8 +17,8 @@ const OrdersPage = () => {
   console.log(session?.user.isadmin);
   console.log(session?.user.name);
 
-  
 
+  const queryClient = useQueryClient();
 
   const {data,isLoading,error} =useQuery({
     queryKey:["value1"],
@@ -31,7 +29,7 @@ const OrdersPage = () => {
 
  const mutation = useMutation({
   mutationFn:async ({id,status}:{id:string,status:string})=>{
-    return (fetch('http://localhost:3000/api/order',{body:JSON.stringify({id,status}),method:'PUT',headers:{'Content-type':'application/json'}}).then((res)=>res.json()))
+    return fetch('http://localhost:3000/api/order',{body:JSON.stringify({id,status}),method:'PUT',headers:{'Content-type':'application/json'}}).then((res)=>res.json())
   },
   onSuccess:()=>{
     alert("hello")
