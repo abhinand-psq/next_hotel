@@ -38,6 +38,7 @@ const Navbar = () => {
           <Link href="/orders">Orders</Link>
         )}
         <CartIcon />
+         <Link href="/add"><button>add</button></Link>
       </div>
     </div>
   );

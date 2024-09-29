@@ -1,12 +1,12 @@
 export type product1 ={
     id:string   
     createdAt:number  
-    title:String
-    desc:String
+    title:string
+    desc:string
     img:string
     price :number
    isFeatured:boolean
-    options :object
+    options :[ { title: string; additionalPrice: number }]
     category:object
     catSlug :String
 }
@@ -54,3 +54,9 @@ export type order={
     user  :   object
     userEmail:string
 }
+
+
+export type datas = {
+    titles:string,
+     price:number
+}[]

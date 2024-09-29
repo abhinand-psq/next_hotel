@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Session from "@/components/authsession";
 import { Quaryfun } from "@/components/Quarystack";
+import Tenquary from "@/components/Quar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div>
+          <Tenquary>
           <Quaryfun>
           <Session>
           <Notification />
@@ -31,6 +33,7 @@ export default function RootLayout({
           <Footer />
           </Session>
           </Quaryfun>
+          </Tenquary>
         </div>
       </body>
     </html>

@@ -1,27 +1,34 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useStore } from "./Store";
 
 type Props = {
   price: number;
-  id: number;
+  id: string;
+  title:string,
   options?: { title: string; additionalPrice: number }[];
 };
 
-const Price = ({ price, id, options }: Props) => {
+const Price = ({ price, id, options ,title}: Props) => {
   const [total, setTotal] = useState(price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
 
+  console.log(typeof price)
+  
+
+  const Adddata= useStore((state) => state.adddata)
+
   useEffect(() => {
     setTotal(
-      quantity * (options ? price + options[selected].additionalPrice : price)
+      quantity * (options?.length? options[selected].additionalPrice : price)
     );
   }, [quantity, selected, options, price]);
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">${total.toFixed(2)}</h2>
+      <h2 className="text-2xl font-bold">{total}</h2>
       {/* OPTIONS CONTAINER */}
       <div className="flex gap-4">
         {options?.map((option, index) => (
@@ -58,7 +65,7 @@ const Price = ({ price, id, options }: Props) => {
           </div>
         </div>
         {/* CART BUTTON */}
-        <button className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500">
+        <button className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500" onClick={()=>{Adddata({titles:title, price:total})}}>
           Add to Cart
         </button>
       </div>

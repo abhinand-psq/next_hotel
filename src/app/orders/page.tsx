@@ -11,12 +11,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 const OrdersPage = () => {
-
   
   const {data:session}= useSession()
-  console.log(session?.user.isadmin);
-  console.log(session?.user.name);
-
 
   const queryClient = useQueryClient();
 
