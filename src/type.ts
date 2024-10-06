@@ -58,5 +58,8 @@ export type order={
 
 export type datas = {
     titles:string,
-     price:number
+     price:number,
+     id:string,
+     titleopt:string,
+     quantity:string
 }[]

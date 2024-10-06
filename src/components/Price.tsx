@@ -15,10 +15,11 @@ const Price = ({ price, id, options ,title}: Props) => {
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
 
-  console.log(typeof price)
-  
 
-  const Adddata= useStore((state) => state.adddata)
+  console.log(typeof price)
+let titleopt = options ? options[selected].title : null
+
+  const Adddata= useStore((state:any) => state.Adddata)
 
   useEffect(() => {
     setTotal(
@@ -65,7 +66,7 @@ const Price = ({ price, id, options ,title}: Props) => {
           </div>
         </div>
         {/* CART BUTTON */}
-        <button className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500" onClick={()=>{Adddata({titles:title, price:total})}}>
+        <button className="uppercase w-56 bg-red-500 text-white p-3 ring-1 ring-red-500" onClick={()=>{Adddata({titles:title, price:total,id,titleopt,quantity})}}>
           Add to Cart
         </button>
       </div>

@@ -38,3 +38,18 @@ export const PUT = async(req:NextRequest)=>{
     return new NextResponse(JSON.stringify("not authenticated"),{status:200})
     }
     
+
+    export const POST = async(req:NextRequest)=>{
+        const vale = await req.json()
+        console.log(vale);
+       try{
+        const result = await prisma.order.create({data:vale})
+        console.log(result);
+        
+        return new NextResponse(JSON.stringify(result),{status:200})
+       }catch(e){
+        console.log(e);
+        return new NextResponse(JSON.stringify("error"),{status:400})
+       }     
+        }
+        
